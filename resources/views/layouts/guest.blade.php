@@ -45,12 +45,18 @@
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
                             <div class="d-flex justify-content-center py-4">
-                                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                @if(auth()->check() && auth()->user())
                                     <img src="{{ setting('app_logo') !== null ? asset('storage/' . setting('app_logo')) : 'https://ui-avatars.com/api/?name=' . auth()->user()->name . '&color=7F9CF5&background=EBF4FF' }}"
                                         alt="">
                                     <span class="d-none d-lg-block">{{ setting('app_title', 'format PT') }}</span>
-                                </a>
-                            </div><!-- End Logo -->
+                                @else
+                                    <img src="{{ asset('https://ui-avatars.com/api/?name=Guest&color=7F9CF5&background=EBF4FF') }}" alt="">
+                                    <span class="d-none d-lg-block">{{ setting('app_title', 'format PT') }}</span>
+                                @endif
+                            </a>
+                        </div><!-- End Logo -->
+
 
                             @yield('content')
 
